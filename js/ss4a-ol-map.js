@@ -1,4 +1,4 @@
-// OpenLayers map for SS4A grant application
+// OpenLayers map for SS4A grant application for Boston Regiono MPO area
 //
 // Author: Ben  Krepp (bkrepp@ctps.org)
 
@@ -111,16 +111,6 @@ var brmpo = new ol.layer.Vector({ title: 'Boston Region MPO (BRMPO)',
 								  style: brmpo_style
 								});
 
-// Vector polygon layer for MAPC area not in BRMPO
-var mapc_non_mpo_style = new ol.style.Style({ fill:   new ol.style.Fill({ color: 'rgba(109, 5, 245, 0.3)' }), 
-                                              stroke: new ol.style.Stroke({ color: 'rgba(109, 5, 245, 1.0)', width: 0.1})
-				});
-var mapc_non_mpo = new ol.layer.Vector({ title: 'MAPC area not within Boston Region MPO',
-										 source: new ol.source.Vector({ url: 'data/geojson/mapc_non_mpo_boundary_poly.geojson',
-										                                format: new ol.format.GeoJSON()
-																       }),
-										 style: mapc_non_mpo_style
-									});
 									
 // Vector polygon layer for underserved 2010 Census Tracts in MAPC area
 var underserved_tracts_style = new ol.style.Style({ fill:   new ol.style.Fill({ color: 'rgba(255, 255, 0, 0.6)' }), 
@@ -132,22 +122,7 @@ var underserved_tracts = new ol.layer.Vector({ title: 'Underserved Communities',
 																       }),
 										     style: underserved_tracts_style
 									});
-
-// Vector point layer for ALL fatal crashes in MAPC area in 2016-2020
-// No longer to be used as of 4:00 p.m., July 28, 2020.
-/******************************************************************************	
-var mapc_crash_style = new ol.style.Style({ image: new ol.style.Circle({ radius: 2.5,
-                                                                          fill: new ol.style.Fill({color: 'red'}) })
-                                                                        });
-var mapc_crashes = 	new ol.layer.Vector({ title: 'Fatal crashes in MAPC area',
-								          source: new ol.source.Vector({  url: 'data/geojson/fatal_crashes_mapc_2016_2020.geojson',
-								                                          format: new ol.format.GeoJSON()
-																}),
-								          style: mapc_crash_style
-								});
-******************************************************************************/
-																	
-															
+																															
 // Vector point layer for accidents in BRMPO area in 2016-2020
 var brmpo_crash_style = new ol.style.Style({ image: new ol.style.Circle({ radius: 2.5,
                                                                           fill: new ol.style.Fill({color: 'red'}) })
@@ -158,16 +133,6 @@ var brmpo_crashes = new ol.layer.Vector({ title: 'Fatal crashes in BRMPO',
 																}),
 								          style: brmpo_crash_style
 								});
-// Vector point layer for accidents in MAPC area not in BRMPO in 2016-2020
-var mapc_non_brmpo_crash_style = new ol.style.Style({ image: new ol.style.Circle({ radius: 2.5,
-                                                                                   fill: new ol.style.Fill({color: 'red'}) })
-                                                                                 });
-var mapc_non_brmpo_crashes = new ol.layer.Vector({ title: 'Fatal crashes in MAPC area, not in BRMPO',
-								                   source: new ol.source.Vector({  url: 'data/geojson/fatal_crashes_mapc_non_brmpo_2016_2020.geojson',
-								                                                   format: new ol.format.GeoJSON()
-																}),
-								                   style: mapc_non_brmpo_crash_style
-		});
 
 
 // Function: initialize()
@@ -276,25 +241,16 @@ function initialize() {
 											title: 'Boston Region MPO (BRMPO)',	
 											visible: true
 										});	
-										
-		var mapc_non_brmpo_wms = new ol.layer.Tile({ source: new ol.source.TileWMS({ url		: szWMSserverRoot,
-																	                 params	: { 'LAYERS': 'postgis:ctps_mapc_non_mpo_boundary_poly', 
-																				                'STYLES': 'ss4a_mapc_non_brmpo_area',
-																				                'TRANSPARENT': 'true'
-																			                  }
-																                   }),
-									                 title: 'MAPC area not within Boston Region MPO',
-													 visible: true
-								                   });	
+											
 												   
-		// This layer renders the boundaries of all MAPC towns (BRMPO and non-BRMPO)
-		var all_mapc_towns = new ol.layer.Tile({ source: new ol.source.TileWMS({ url:		szWMSserverRoot,
-		                                                                         params: { 'LAYERS' : 'postgis:ctps_all_mapc_towns',
+		// This layer renders the boundaries of all towns in the BRMPO area
+		var brmpo_towns = new ol.layer.Tile({ source: new ol.source.TileWMS({ url:		szWMSserverRoot,
+		                                                                         params: { 'LAYERS' : 'postgis:ctps_brmpo_towns',
 																				           'STYLES' : 'slategray_stroke',
 																						   'TRANSPARENT' : true
 																				         }
 																				}),
-												title: 'MAPC town boundaries',
+												title: 'BRMPO town boundaries',
 												visible: true
 											});
 
@@ -305,11 +261,9 @@ function initialize() {
                                          mgis_basemap_layers['structures'],
                                          mgis_basemap_layers['basemap_features'],
 										 brmpo_wms,
-										 mapc_non_brmpo_wms,
-										 all_mapc_towns, 
+										 brmpo_towns, 
 										 underserved_tracts,
-										 brmpo_crashes,
-										 mapc_non_brmpo_crashes
+										 brmpo_crashes
                                       ],
                                target: 'map',
                                view:   initMapView,
