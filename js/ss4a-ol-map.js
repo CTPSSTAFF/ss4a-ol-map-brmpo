@@ -110,7 +110,16 @@ var brmpo = new ol.layer.Vector({ title: 'Boston Region MPO (BRMPO)',
 																}),
 								  style: brmpo_style
 								});
+// Vector polygon layer for boundaries of all towns in the BRMPO area
 
+var brmpo_towns_style = new ol.style.Style({ stroke: new ol.style.Stroke({ color: 'rgba(112, 128, 140,1.0)', width: 0.1})
+										  });
+var brmpo_towns = new ol.layer.Vector({ title: 'BRMPO Town Boundaries',
+										      source: new ol.source.Vector({ url: 'data/geojson/ctps_brmpo_towns.geojson',
+										                                     format: new ol.format.GeoJSON()
+																       }),
+										     style: brmpo_towns_style
+									});
 									
 // Vector polygon layer for underserved 2010 Census Tracts in MAPC area
 var underserved_tracts_style = new ol.style.Style({ fill:   new ol.style.Fill({ color: 'rgba(255, 255, 0, 0.6)' }), 
@@ -243,7 +252,8 @@ function initialize() {
 										});	
 											
 												   
-		// This layer renders the boundaries of all towns in the BRMPO area
+		// This layer renders the boundaries of all towns in the BRMPO area - CHANGED TO A VECTOR LAYER
+/*
 		var brmpo_towns = new ol.layer.Tile({ source: new ol.source.TileWMS({ url:		szWMSserverRoot,
 		                                                                         params: { 'LAYERS' : 'postgis:ctps_brmpo_towns',
 																				           'STYLES' : 'slategray_stroke',
@@ -253,6 +263,7 @@ function initialize() {
 												title: 'BRMPO town boundaries',
 												visible: true
 											});
+*/ 
 
         // Create OpenLayers map
         ol_map = new ol.Map({ layers: [  stamen_basemap_layer, 
