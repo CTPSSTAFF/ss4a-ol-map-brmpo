@@ -112,7 +112,7 @@ var brmpo = new ol.layer.Vector({ title: 'Boston Region MPO (BRMPO)',
 								});
 // Vector polygon layer for boundaries of all towns in the BRMPO area
 
-var brmpo_towns_style = new ol.style.Style({ stroke: new ol.style.Stroke({ color: 'rgba(112, 128, 140,1.0)', width: 0.1})
+var brmpo_towns_style = new ol.style.Style({ stroke: new ol.style.Stroke({ color: 'rgba(112, 128, 140,1.0)', width: 0.2})
 										  });
 var brmpo_towns = new ol.layer.Vector({ title: 'BRMPO Town Boundaries',
 										      source: new ol.source.Vector({ url: 'data/geojson/ctps_brmpo_towns.geojson',
