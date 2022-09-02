@@ -42,6 +42,9 @@
     width: 100%;  
 }
 
+/* Hide OpenLayers Attribution on map */
+.ol-attribution { display: none; }
+
 /* Rules for OpenLayers map popup */
 .ol-popup {
         position: absolute;
@@ -84,9 +87,6 @@
       .ol-popup-closer:after {
         content: "✖";
       }
-
-/* Hide OpenLayers Attribution on map */
-/* .ol-attribution { display: none; } */
 
 /* In case we use jQueryUI, the following overrides jQueryUI ui-widget class size of "1.2em" */
 .ui-widget {
