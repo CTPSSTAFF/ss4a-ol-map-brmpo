@@ -317,9 +317,9 @@ function initialize() {
 		var popupWindow = window.open(url,'popUpWindow','height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes')
 	} // popup()
 
-	displaySupportingDoc = function() {
+	var displayMoreInfo = function() {
 		popup('supporting_documentation.html');
 	}; 
 	// event handler
-	$('#supporting_doc_button').bind('click', displaySupportingDoc);
+	$('#more_info_button').bind('click', displayMoreInfo);
 } // initialize()
